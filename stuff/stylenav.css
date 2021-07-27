@@ -1,0 +1,262 @@
+/* fix fixed-bar */
+body { padding-top: 60px; font-family: Arial, sans-serif; }
+@media screen and (max-width: 768px) {
+  body { padding-top: 60px; }
+}
+
+
+ul.b {
+	list-style-position: inside;
+	font-size:calc(12px + 0.2vw);
+   /* Remove the underline */
+   text-decoration: none;
+   /* Dark gray color */
+   color: #131313;
+	padding-left: 6%;
+
+}
+
+.thumbnail-image{
+  
+    width: 90%;
+    height: auto;
+    display: block;
+}
+
+
+
+.note{background-color: #F7F6F1;
+	font-family: Arial, sans-serif;
+padding-left:2%;
+	  display: table-cell;
+/*  text-align: center;*/
+/*  vertical-align: middle;*/
+ }
+.emf{color: #B31E24;
+/*font-weight: bold; */
+	
+}
+
+
+/* fix fixed-bar jumping to in-page anchor issue */
+*[id]:before { 
+  display: block; 
+  content: " "; 
+  margin-top: -75px; 
+  height: 75px; 
+  visibility: hidden; 
+}
+
+.social-icon {
+   font-size: calc(16px + 0.5vw);
+   /* Remove the underline */
+   text-decoration: none;
+   /* Dark gray color */
+   color: #444;
+   /* Extra space between icons */
+	text-align: left;
+	align-content: left;
+}
+
+.fa{
+   /* Remove the underline */
+   text-decoration: none;
+   /* Dark gray color */
+   color: #444;
+   /* Extra space between icons */
+/*   letter-spacing: 24px;*/
+	   font-size: 1.45vw;
+   /* Remove the underline /
+   /* Extra space between icons */
+	text-align: left;
+	align-content: left;
+    width: 1.45vw;
+    height: 1.45vw;
+}
+
+.fa:hover { color:  #B31E24; } /* CSS link hover (green) */
+
+
+
+.font-a{
+   font-size:calc(12px + 0.2vw);
+   /* Remove the underline */
+   text-decoration: none;
+   /* Dark gray color */
+   color: #158098;
+   /* Extra space between icons */
+/*
+	text-align: left;
+
+   padding-left: 5%;
+*/
+}
+.font-a:hover { color:  #0097b9; } 
+
+
+.font-icon{
+   font-size:calc(12px + 0.2vw);
+   /* Remove the underline */
+   text-decoration: none;
+   /* Dark gray color */
+   color: #B31E24;
+   /* Extra space between icons */
+	text-align: left;
+
+   padding-left: 5%;
+}
+.font-icon:hover { color:  #000000; } 
+
+.font-contact{
+   font-size:calc(14px + 0.2vw);
+   /* Remove the underline */
+   text-decoration: none;
+   /* Dark gray color */
+   color: #B31E24;
+   /* Extra space between icons */
+	text-align: left;
+
+   padding-left: 5%;
+}
+
+.publication-year{
+   font-size:calc(14px + 0.2vw);
+   /* Remove the underline */
+   text-decoration: none;
+   /* Dark gray color */
+   color: #B31E24;
+   /* Extra space between icons */
+
+}
+
+.paper{
+   font-size:calc(12px + 0.2vw);
+   /* Remove the underline */
+   text-decoration: none;
+   /* Dark gray color */
+   color: #131313;
+   /* Extra space between icons */
+/*	text-align: left;*/
+
+   padding-left: 3%;
+
+}
+
+.title{
+   font-size:calc(13px + 0.2vw);
+   /* Remove the underline */
+   text-decoration:none;
+   /* Dark gray color */
+   color: #1E1E1E;
+	font-weight: bold;
+
+   /* Extra space between icons */
+
+}
+
+.author{
+   font-size:calc(12.7px + 0.2vw);
+   /* Remove the underline */
+   text-decoration:none;
+   /* Dark gray color */
+   color: #1E1E1E;
+}
+
+.venue{
+   font-size:calc(12.5px + 0.2vw);
+   /* Remove the underline */
+   text-decoration:none;
+   /* Dark gray color */
+   color: #1E1E1E;
+	font-style: oblique;
+
+}
+
+.paper-link{
+   text-decoration: none;
+   color: #00758F;
+	  font-size:calc(12px + 0.2vw);
+
+
+}
+
+.paper-link:hover { color:  #1E1E1E/* CSS link hover (green) */}
+
+
+.font-big{
+   font-size:calc(18px + 0.2vw);
+   /* Remove the underline */
+   text-decoration: none;
+   /* Dark gray color */
+   color: #B31E24;
+   /* Extra space between icons */
+	text-align: left;
+
+   padding-left: 5%;
+}
+
+.font-publications{
+   font-size:calc(14px + 0.2vw);
+   /* Remove the underline */
+   text-decoration: none;
+   /* Dark gray color */
+   color: #B31E24;
+   /* Extra space between icons */
+	text-align: left;
+
+/*   padding-left: 6%;*/
+}
+
+.font-small-grey{
+   font-size:calc(12px + 0.2vw);
+   /* Remove the underline */
+   text-decoration: none;
+   /* Dark gray color */
+   color: #6E6E6E;
+   /* Extra space between icons */
+/*	text-align: left;*/
+
+/*
+   padding-left: 6%;
+	  display: table-cell;
+*/
+}
+
+.font-small-research{
+   font-size:calc(12px + 0.2vw);
+   /* Remove the underline */
+   text-decoration: none;
+   /* Dark gray color */
+   color: #131313;
+   /* Extra space between icons */
+/*	text-align: left;*/
+
+/*
+   padding-left: 6%;
+	  display: table-cell;
+*/
+}
+
+
+
+.font-small{
+   font-size:calc(12px + 0.2vw);
+   /* Remove the underline */
+   text-decoration: none;
+   /* Dark gray color */
+   color: #131313;
+   /* Extra space between icons */
+/*	text-align: left;*/
+
+   padding-left: 6%;
+	  display: table-cell;
+}
+
+.hr2 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 1px;
+  border-top: 0.5px solid #B3B3B3;
+}
+
+
