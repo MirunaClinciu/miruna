@@ -12,12 +12,14 @@
 </script>
   <title>Miruna Clinciu</title>
 <meta name="description" content="Miruna Clinciu">
-<meta name="keywords" content="Miruna Clinciu, explainable, explanations, XAI, Explainable AI, interpretability, terminology, trust, fairness">
+<meta name="keywords" content="Miruna Clinciu, explainable, explanations, XAI, Explainable AI, interpretability, terminology, trust, fairness, LLM, large language models, ChatGPT, GPT4, GPT5">
 <meta name="robots" content="index, follow">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="language" content="English">
 <meta name="author" content="Miruna Clinciu">
 <meta name="google-site-verification" content="0Hfuyb4ymv1JMajlBPr0ZUYvu_UY5Fc1MZAL5X0Mpw4" />
+
+
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -28,7 +30,11 @@
 	
 	<link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" type="text/css">
 
-	
+	 <style>
+    .font-blog {
+      margin-bottom: 70px;
+    }
+  </style>
 
 </head>
 <body>
@@ -36,7 +42,7 @@
 <nav class="navbar navbar-default navbar-fixed-top navbar-customclass">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="index.html#" style="color: #BC2F31"><strong>Miruna Clinciu</strong></a>
+      <a class="navbar-brand" href="/index.html#" style="color: #BC2F31"><strong>Miruna Clinciu</strong></a>
 
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
@@ -46,26 +52,68 @@
       </button>
     </div>
     <ul class="nav navbar-nav navbar-right collapse navbar-collapse">
-      <li class="active"><a href="index.html#about">About me</a></li>
-	      <li><a href="index.html#news">News</a></li>
-      <li><a href="index.html#research">Research</a></li>
-      <li><a href="experiences.html">Experiences</a></li>
-	<li><a href="blog.html">Blog</a></li>
-	<li><a href="art.html">Art</a></li>
+      <li class="active"><a href="/index.html#about">About me</a></li>
+	      <li><a href="/index.html#news">News</a></li>
+      <li><a href="/index.html#research">Research</a></li>
+      <li><a href="/experiences.html">Experiences</a></li>
+	<li><a href="/blog.html">Blog</a></li>
+	<li><a href="/art.html">Art</a></li>
     </ul>
   </div>
 </nav>
 
 <div class="container">
 <div class="container-fluid">
-  <div class="row">
-					 <div class="font-big"><strong>Blog</strong></div><hr class="hr2">
-	  	  <div class="font-small-research"> To be updated.</div>
+	<div class="font-blog">
+<!--Here you modify article title-->
+	</div>
+			
+<div class="container-fluid pull-right">  <a href="https://www.buymeacoffee.com/miruna"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=miruna&button_colour=080808&font_colour=ffffff&font_family=Cookie&outline_colour=ffffff&coffee_colour=FFDD00"/></a>
 
+			 </div>
+ <div id="Some words" class="chapter">
+        <div class="chapter-header">
+          <h3>Articles</h3>
+			  <p>This is the introduction to the book. It sets the stage for the story to unfold.</p>
+		
+		<div>  <input type="text" id="searchInput" class="form-control" placeholder="Search within the article..." aria-label="Search"></div>
+		
 	
+				 <hr class="hr2"> 
+	 </div></div>
+	
+	
+	<div class="row">
+  <div class="col-sm-4"> <div class="toc">
+	          <ul class="list-unstyled">
+				  <li><a href="#chapter1">My Top Picks for Exploring Artificial Intelligence</a> </li>
+					<li><a href="#chapter2">Chapter 2: The Journey Begins</a></li>
+
+		 	 </ul>
+
+	  </div></div>
+  <div class="col-sm-8">
+    <!-- Main Content -->
+      <div id="chapter1" class="chapter">
+        <div class="chapter-header">
+          <h3><a href="articles/article1.html">My Top Picks for Exploring Artificial Intelligence</a></h3>
+        </div>
+        <div class="chapter-content">
+          <p>Summary: My Top Picks for Exploring Artificial Intelligence</p>
+        </div>
+		</div>
+
+     
+      <div id="chapter2" class="chapter">
+        <div class="chapter-header">
+          <h3>SVM?</h3>
+        </div>
+        <div class="chapter-content">
+          <p>This is the introduction to the book. It sets the stage for the story to unfold.</p></div></div>
+
+		  </div>
 </div>
-
-
+     
 	
 <!-- Footer -->
 <footer class="text-center text-lg-start bg-light text-muted">
@@ -103,4 +151,36 @@
   <!-- Copyright -->
 </footer>
 <!-- Footer -->
+	 
+	 	</body>
+	
+	   <script>
+    document.getElementById('searchInput').addEventListener('input', function() {
+  const query = this.value.toLowerCase();
+  const chapters = document.querySelectorAll('.chapter-content');
+
+  chapters.forEach(chapter => {
+    const text = chapter.textContent.toLowerCase();
+    if (text.includes(query)) {
+      chapter.style.display = 'block';
+      highlightText(chapter, query);
+    } else {
+      chapter.style.display = 'none';
+    }
+  });
+});
+
+function highlightText(chapter, query) {
+  const innerHTML = chapter.innerHTML;
+  const index = innerHTML.toLowerCase().indexOf(query);
+  if (index >= 0) {
+    chapter.innerHTML = innerHTML.substring(0, index) +
+      "<span class='highlight'>" +
+      innerHTML.substring(index, index + query.length) +
+      "</span>" +
+      innerHTML.substring(index + query.length);
+  }
+}
+
+    </script>
 </html>
