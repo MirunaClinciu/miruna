@@ -155,29 +155,23 @@ h1, h2, h3 {
           <h3>My Top Picks for Exploring Artificial Intelligence</h3>
 					  <p>This page will definitely be updated over time.</p>
 
-		<div> 
-			
-           <div class="search-container bg-white p-4 sm:p-6 rounded-lg shadow-lg mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <input type="text" id="searchInput" placeholder="Search for words..."
-               class="flex-grow p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-base">
-        
-        <div class="flex flex-wrap justify-center sm:justify-start gap-3">
-            <button id="searchButton"
-                    class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md transition duration-150 ease-in-out">
-                Search
-            </button>
-            <button id="prevButton"
-                    class="bg-gray-400 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded-md transition duration-150 ease-in-out">
-                Previous
-            </button>
-            <button id="nextButton"
-                    class="bg-gray-400 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded-md transition duration-150 ease-in-out">
-                Next
-            </button>
-        </div>
-        <div id="searchResults" class="text-gray-700 text-sm mt-2 sm:mt-0 sm:ml-4"></div>
-    </div>
-
+<div> 
+			           <div class="search-container">
+                                <input type="text" id="searchInput" placeholder="Search for words..." class="form-control">
+        
+                                <div class="btn-group" role="group" aria-label="Search navigation">
+                    <button id="searchButton" class="btn btn-primary">
+                        Search
+                    </button>
+                    <button id="prevButton" class="btn btn-default">
+                        Previous
+                    </button>
+                    <button id="nextButton" class="btn btn-default">
+                        Next
+                    </button>
+                </div>
+                                <div id="searchResults" class="text-muted"></div>
+            </div>
 			</div>
 		
 	
