@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Changed to target the entire document body
     const searchInput = document.getElementById('searchInput');
     const searchButton = document.getElementById('searchButton');
-    const contentDiv = document.getElementById('content');
-    let originalContent = contentDiv.innerHTML; // Store the original content
+    const targetElement = document.body; // Now targets the entire body
+    let originalContent = targetElement.innerHTML; // Stores the original content of the body
 
     /**
      * Removes all existing highlights from the content.
@@ -10,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function removeHighlights() {
         // Restore the original content to remove all highlights
-        contentDiv.innerHTML = originalContent;
+        targetElement.innerHTML = originalContent;
     }
 
     /**
@@ -31,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Use a temporary div to process the content to avoid issues with direct innerHTML manipulation
         // This helps preserve event listeners if they were present (though not in this simple example)
         const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = originalContent;
+        tempDiv.innerHTML = originalContent; // Populate tempDiv with the body's original content
 
         // Traverse the text nodes and replace matches
         function traverseAndHighlight(node) {
@@ -73,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         traverseAndHighlight(tempDiv);
-        contentDiv.innerHTML = tempDiv.innerHTML; // Update the main content div
+        targetElement.innerHTML = tempDiv.innerHTML; // Update the entire body's content
     }
 
     // Event listener for the search button click
