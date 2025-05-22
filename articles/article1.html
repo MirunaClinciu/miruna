@@ -58,7 +58,38 @@ h1, h2, h3 {
 }
 
   }
-
+		   #comment-form {
+      margin-bottom: 1em;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.5em;
+      margin-top: 0.5em;
+      font-size: 1em;
+    }
+    button {
+      margin-top: 0.5em;
+      padding: 0.5em 1em;
+      font-size: 1em;
+    }
+    .comment {
+      border-bottom: 1px solid #ccc;
+      padding: 0.5em 0;
+      position: relative;
+    }
+    .comment .name {
+      font-weight: bold;
+    }
+    .delete-button {
+      position: absolute;
+      right: 0;
+      top: 0;
+      background: none;
+      border: none;
+      color: red;
+      cursor: pointer;
+      font-size: 0.9em;
+    }
   </style>
 
 </head>
@@ -122,6 +153,22 @@ h1, h2, h3 {
 		
 			
         </div>
+	 
+	 
+	 	 <hr class="hr2"> 
+	 <h4>Leave a Comment</h4>
+  <form id="comment-form">
+    <input type="text" id="name-input" placeholder="Your name" required />
+    <textarea id="comment-input" placeholder="Write your comment here..." required></textarea><br/>
+    <button type="submit">Submit</button>
+  </form>
+
+  <div id="comments-section">
+    <h4>Comments</h4>
+    <div id="comments-list"></div>
+  </div>
+
+	 	 	 <hr class="hr2"> 
 	 </div></div></div>
 	
 <!-- Footer -->
@@ -190,5 +237,67 @@ function highlightText(chapter, query) {
 }
 
     </script>
+	
+<!--	Here is the chat-->
+	
+  <script>
+    const form = document.getElementById('comment-form');
+    const nameInput = document.getElementById('name-input');
+    const commentInput = document.getElementById('comment-input');
+    const commentsList = document.getElementById('comments-list');
+
+    // Load comments from localStorage
+    let comments = JSON.parse(localStorage.getItem('comments')) || [];
+
+    // Function to render comments
+    function renderComments() {
+      commentsList.innerHTML = '';
+      comments.forEach((comment, index) => {
+        const commentDiv = document.createElement('div');
+        commentDiv.classList.add('comment');
+
+        const nameSpan = document.createElement('span');
+        nameSpan.classList.add('name');
+        nameSpan.textContent = comment.name + ': ';
+        commentDiv.appendChild(nameSpan);
+
+        const textSpan = document.createElement('span');
+        textSpan.textContent = comment.text;
+        commentDiv.appendChild(textSpan);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.classList.add('delete-button');
+        deleteButton.addEventListener('click', () => {
+          comments.splice(index, 1);
+          localStorage.setItem('comments', JSON.stringify(comments));
+          renderComments();
+        });
+
+        commentDiv.appendChild(deleteButton);
+        commentsList.appendChild(commentDiv);
+      });
+    }
+
+    // Initial render
+    renderComments();
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const name = nameInput.value.trim();
+      const text = commentInput.value.trim();
+      if (name && text) {
+        const newComment = {
+          name: name,
+          text: text
+        };
+        comments.unshift(newComment);
+        localStorage.setItem('comments', JSON.stringify(comments));
+        renderComments();
+        nameInput.value = '';
+        commentInput.value = '';
+      }
+    });
+  </script>
 		</body>
 </html>
