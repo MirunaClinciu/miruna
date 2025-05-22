@@ -1,4 +1,5 @@
-  // Global variables to manage highlighted elements and current index
+
+        // Global variables to manage highlighted elements and current index
         let highlightedElements = [];
         let currentIndex = -1;
         // Stores the initial HTML content of the specific content area
@@ -34,10 +35,8 @@
         /**
          * Performs the search operation:
          * 1. Resets previous highlights and restores original content of the content area.
-         * 2. Finds all occurrences of the search term (case-insensitive) using string replacement.
-         * 3. Re-inserts the modified HTML into the content area.
-         * 4. Collects the newly created highlight elements.
-         * 5. Updates the search results count and jumps to the first highlighted occurrence if any are found.
+         * 2. Finds all occurrences of the search term (case-insensitive) and highlights them.
+         * 3. Updates the search results count and jumps to the first highlighted occurrence if any are found.
          */
         function searchAndMark() {
             const searchTerm = document.getElementById('searchInput').value.trim();
@@ -62,18 +61,58 @@
             }
 
             // Create a regular expression for case-insensitive and global search
-            // We escape special characters in the search term to treat it as a literal string
+            // Escape special characters in the search term to treat it as a literal string
             const escapedSearchTerm = searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            const regex = new RegExp(`(${escapedSearchTerm})`, 'gi'); // 'g' for global, 'i' for case-insensitive
+            const regex = new RegExp(escapedSearchTerm, 'gi'); // 'g' for global, 'i' for case-insensitive
 
-            // Perform the highlighting by replacing occurrences in the string HTML
-            // This is generally more robust for ensuring HTML is parsed correctly
-            let highlightedHTML = originalContentAreaHTML.replace(regex, '<span class="highlight">$&</span>');
-            
-            // Update the content area with the new highlighted HTML
-            contentAreaElement.innerHTML = highlightedHTML;
+            /**
+             * Recursively traverses the DOM to find and highlight text nodes.
+             * It avoids modifying script, style, input, button, and textarea elements.
+             * @param {Node} node - The current DOM node to process.
+             */
+            function highlightTextNodesRecursive(node) {
+                // Process text nodes
+                if (node.nodeType === Node.TEXT_NODE) {
+                    const text = node.nodeValue;
+                    // Reset regex lastIndex for this text node to ensure all matches are found
+                    regex.lastIndex = 0; 
+                    
+                    if (regex.test(text)) {
+                        const tempDiv = document.createElement('div');
+                        // Replace matches with span tags. $& inserts the matched text.
+                        tempDiv.innerHTML = text.replace(regex, '<span class="highlight">$&</span>');
+                        
+                        // Replace the original text node with the children from the temporary div
+                        // We need to iterate and append each child because replaceChild only takes one node
+                        while (tempDiv.firstChild) {
+                            node.parentNode.insertBefore(tempDiv.firstChild, node);
+                        }
+                        node.parentNode.removeChild(node); // Remove the original text node
+                    }
+                }
+                // Process element nodes, but skip certain tags (and the search container itself)
+                else if (node.nodeType === Node.ELEMENT_NODE &&
+                           node.tagName !== 'SCRIPT' &&
+                           node.tagName !== 'STYLE' &&
+                           node.tagName !== 'INPUT' &&
+                           node.tagName !== 'BUTTON' &&
+                           node.tagName !== 'TEXTAREA' &&
+                           node.id !== 'search-container') { // Exclude the search container from being modified
+                    // Create a shallow copy of childNodes because node.childNodes is a live collection
+                    // and can change during replacement, leading to skipped nodes.
+                    const children = Array.from(node.childNodes);
+                    for (let i = 0; i < children.length; i++) {
+                        highlightTextNodesRecursive(children[i]);
+                    }
+                }
+            }
 
-            // Collect all the newly created highlight elements
+            // Start highlighting from the content area element
+            if (contentAreaElement) {
+                highlightTextNodesRecursive(contentAreaElement);
+            }
+
+            // After all replacements, collect all the newly created highlight elements
             highlightedElements = Array.from(contentAreaElement.querySelectorAll('.highlight'));
 
             // Update the search results message and jump to the first highlight if found
