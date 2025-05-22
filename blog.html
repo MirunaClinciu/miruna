@@ -79,7 +79,6 @@
           <h3>Articles</h3>
 			  <p>This is the introduction to the book. It sets the stage for the story to unfold.</p>
 		
-		<div>  <input type="text" id="searchInput" class="form-control" placeholder="Search within the article..." aria-label="Search"></div>
 		
 	
 				 <hr class="hr2"> 
@@ -161,34 +160,4 @@
 <!-- Footer -->
 	 
 	 	</body>
-	
-	   <script>
-    document.getElementById('searchInput').addEventListener('input', function() {
-  const query = this.value.toLowerCase();
-  const chapters = document.querySelectorAll('.chapter-content');
-
-  chapters.forEach(chapter => {
-    const text = chapter.textContent.toLowerCase();
-    if (text.includes(query)) {
-      chapter.style.display = 'block';
-      highlightText(chapter, query);
-    } else {
-      chapter.style.display = 'none';
-    }
-  });
-});
-
-function highlightText(chapter, query) {
-  const innerHTML = chapter.innerHTML;
-  const index = innerHTML.toLowerCase().indexOf(query);
-  if (index >= 0) {
-    chapter.innerHTML = innerHTML.substring(0, index) +
-      "<span class='highlight'>" +
-      innerHTML.substring(index, index + query.length) +
-      "</span>" +
-      innerHTML.substring(index + query.length);
-  }
-}
-
-    </script>
 </html>
