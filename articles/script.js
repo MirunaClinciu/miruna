@@ -1,6 +1,6 @@
         // Store the original HTML content of the searchable area
         let originalContentHTML = '';
-        const contentAreaId = 'body'; // ID of the div containing the content to be searched
+        const contentAreaId = 'chapter-content'; // ID of the div containing the content to be searched
 
         /**
          * Initializes the script when the DOM is fully loaded.
