@@ -58,54 +58,27 @@ h1, h2, h3 {
   margin-bottom: 1em;
   line-height: 1.2;
 }
-		 
-        .highlight {
-            background-color: #fcd34d; /* Tailwind yellow-300 */
-            font-weight: 600; /* Semi-bold */
-            padding: 2px 4px;
-            border-radius: 4px; /* Rounded corners */
-            transition: background-color 0.2s ease-in-out;
-        }
-        /* Styles for the currently active highlighted word */
-        .active-highlight {
-            background-color: #ef4444; /* Tailwind red-500 */
-            color: white;
-            outline: 2px solid #dc2626; /* Tailwind red-600 for stronger outline */
-            box-shadow: 0 0 8px rgba(220, 38, 38, 0.5); /* Subtle red shadow */
-        }
-/* Custom styling for the search container to align with Bootstrap */
         .search-container {
-            padding: 15px;
             margin-bottom: 20px;
-            background-color: #f8f8f8; /* Light grey background */
-            border: 1px solid #e7e7e7; /* Light border */
-            border-radius: 4px; /* Slightly rounded corners */
-            display: flex; /* Use flexbox for alignment */
-            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            padding: 15px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: flex;
             align-items: center;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
             gap: 10px; /* Space between items */
         }
         .search-container .form-control {
-            flex-grow: 1; /* Allow input to grow */
-            min-width: 180px; /* Ensure it doesn't get too small */
+            flex-grow: 1;
+            min-width: 180px; /* Ensure input doesn't get too small */
         }
-        .search-container .btn {
-            /* Bootstrap buttons already have good padding and margins */
-            margin-top: 0; /* Override any default margin-top if present */
-            margin-bottom: 0;
+        .highlight {
+            background-color: yellow; /* Standard highlight color */
+            font-weight: bold;
+            padding: 2px 4px;
+            border-radius: 3px;
         }
-        #searchResults {
-            margin-top: 5px;
-            width: 100%; /* Take full width on smaller screens */
-            text-align: center; /* Center text */
-        }
-        @media (min-width: 768px) { /* Adjust for larger screens */
-            #searchResults {
-                width: auto; /* Auto width on larger screens */
-                text-align: left; /* Align left */
-                margin-top: 0;
-                margin-left: 15px; /* Add some left margin */
-            }
         }
   </style>
 
@@ -155,24 +128,11 @@ h1, h2, h3 {
           <h3>My Top Picks for Exploring Artificial Intelligence</h3>
 					  <p>This page will definitely be updated over time.</p>
 
-<div> 
-			           <div class="search-container">
-                                <input type="text" id="searchInput" placeholder="Search for words..." class="form-control">
-        
-                                <div class="btn-group" role="group" aria-label="Search navigation">
-                    <button id="searchButton" class="btn btn-primary">
-                        Search
-                    </button>
-                    <button id="prevButton" class="btn btn-default">
-                        Previous
-                    </button>
-                    <button id="nextButton" class="btn btn-default">
-                        Next
-                    </button>
-                </div>
-                                <div id="searchResults" class="text-muted"></div>
-            </div>
-			</div>
+
+<div class="search-container">
+        <input type="text" id="searchInput" class="form-control" placeholder="Type to highlight words...">
+        <button id="searchButton" class="btn btn-primary">Highlight</button>
+    </div>
 		
 	
 				 <hr class="hr2"> 
