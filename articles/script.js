@@ -1,5 +1,4 @@
-
-        // Global variables to manage highlighted elements and current index
+  // Global variables to manage highlighted elements and current index
         let highlightedElements = [];
         let currentIndex = -1;
         // Stores the initial HTML content of the specific content area
@@ -10,12 +9,12 @@
          * Stores the original content area HTML and attaches event listeners to buttons and the search input.
          */
         document.addEventListener('DOMContentLoaded', () => {
-            // Store the original content of the 'content-area' div
-            const contentAreaElement = document.getElementById('content-area');
+            // Store the original content of the 'searchable-content' div
+            const contentAreaElement = document.getElementById('searchable-content');
             if (contentAreaElement) {
                 originalContentAreaHTML = contentAreaElement.innerHTML;
             } else {
-                console.error("Error: 'content-area' element not found. Search functionality may not work.");
+                console.error("Error: 'searchable-content' element not found. Search functionality may not work.");
                 return; // Exit if the content area isn't found
             }
 
@@ -41,13 +40,13 @@
         function searchAndMark() {
             const searchTerm = document.getElementById('searchInput').value.trim();
             const searchResultsDiv = document.getElementById('searchResults');
-            const contentAreaElement = document.getElementById('content-area');
+            const contentAreaElement = document.getElementById('searchable-content'); // Target the correct ID
 
             // Reset previous highlights and restore the content area to its original state
             if (contentAreaElement) {
                 contentAreaElement.innerHTML = originalContentAreaHTML;
             } else {
-                console.error("Error: 'content-area' element not found during search. Cannot reset content.");
+                console.error("Error: 'searchable-content' element not found during search. Cannot reset content.");
                 return;
             }
             
@@ -60,7 +59,7 @@
                 return;
             }
 
-            // Create a regular expression for case-insensitive and global search
+            // Create a regular expression for case-insensitive search
             // Escape special characters in the search term to treat it as a literal string
             const escapedSearchTerm = searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
             const regex = new RegExp(escapedSearchTerm, 'gi'); // 'g' for global, 'i' for case-insensitive
@@ -71,35 +70,46 @@
              * @param {Node} node - The current DOM node to process.
              */
             function highlightTextNodesRecursive(node) {
-                // Process text nodes
+                // Only process text nodes
                 if (node.nodeType === Node.TEXT_NODE) {
                     const text = node.nodeValue;
-                    // Reset regex lastIndex for this text node to ensure all matches are found
-                    regex.lastIndex = 0; 
-                    
-                    if (regex.test(text)) {
-                        const tempDiv = document.createElement('div');
-                        // Replace matches with span tags. $& inserts the matched text.
-                        tempDiv.innerHTML = text.replace(regex, '<span class="highlight">$&</span>');
+                    regex.lastIndex = 0; // Reset regex lastIndex for each new text node
+
+                    let match;
+                    let lastIndex = 0;
+                    const fragment = document.createDocumentFragment();
+                    let matchesFoundInNode = false;
+
+                    while ((match = regex.exec(text)) !== null) {
+                        matchesFoundInNode = true;
+                        // Append the text before the match
+                        fragment.appendChild(document.createTextNode(text.substring(lastIndex, match.index)));
+
+                        // Create and append the highlight span
+                        const span = document.createElement('span');
+                        span.className = 'highlight';
+                        span.textContent = match[0];
+                        fragment.appendChild(span);
                         
-                        // Replace the original text node with the children from the temporary div
-                        // We need to iterate and append each child because replaceChild only takes one node
-                        while (tempDiv.firstChild) {
-                            node.parentNode.insertBefore(tempDiv.firstChild, node);
-                        }
-                        node.parentNode.removeChild(node); // Remove the original text node
+                        lastIndex = regex.lastIndex;
+                    }
+
+                    if (matchesFoundInNode) {
+                        // Append any remaining text after the last match
+                        fragment.appendChild(document.createTextNode(text.substring(lastIndex)));
+                        // Replace the original text node with the fragment
+                        node.parentNode.replaceChild(fragment, node);
                     }
                 }
-                // Process element nodes, but skip certain tags (and the search container itself)
+                // Recursively call for child elements, skipping certain tags
                 else if (node.nodeType === Node.ELEMENT_NODE &&
                            node.tagName !== 'SCRIPT' &&
                            node.tagName !== 'STYLE' &&
                            node.tagName !== 'INPUT' &&
                            node.tagName !== 'BUTTON' &&
                            node.tagName !== 'TEXTAREA' &&
-                           node.id !== 'search-container') { // Exclude the search container from being modified
-                    // Create a shallow copy of childNodes because node.childNodes is a live collection
-                    // and can change during replacement, leading to skipped nodes.
+                           node.id !== 'search-container') {
+                    // Iterate over a static copy of childNodes to avoid issues during DOM modification
                     const children = Array.from(node.childNodes);
                     for (let i = 0; i < children.length; i++) {
                         highlightTextNodesRecursive(children[i]);
@@ -107,12 +117,12 @@
                 }
             }
 
-            // Start highlighting from the content area element
+            // Start the recursive highlighting process from the main content area
             if (contentAreaElement) {
                 highlightTextNodesRecursive(contentAreaElement);
             }
 
-            // After all replacements, collect all the newly created highlight elements
+            // After all highlighting is done, collect all the newly created highlight elements
             highlightedElements = Array.from(contentAreaElement.querySelectorAll('.highlight'));
 
             // Update the search results message and jump to the first highlight if found
@@ -131,7 +141,7 @@
          * Scrolls the active element into view.
          */
         function jumpToCurrentHighlight() {
-            // Remove 'active-highlight' class from all previously active elements
+            // Remove 'active-highlight' class from all previous highlights
             highlightedElements.forEach(el => el.classList.remove('active-highlight'));
 
             // If there are highlights and the current index is valid
