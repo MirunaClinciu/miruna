@@ -73,6 +73,42 @@ h1, h2, h3 {
             outline: 2px solid #dc2626; /* Tailwind red-600 for stronger outline */
             box-shadow: 0 0 8px rgba(220, 38, 38, 0.5); /* Subtle red shadow */
         }
+
+
+        /* Custom styling for the search container to align with Bootstrap */
+        .search-container {
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #f8f8f8; /* Light grey background */
+            border: 1px solid #e7e7e7; /* Light border */
+            border-radius: 4px; /* Slightly rounded corners */
+            display: flex; /* Use flexbox for alignment */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            align-items: center;
+            gap: 10px; /* Space between items */
+        }
+        .search-container .form-control {
+            flex-grow: 1; /* Allow input to grow */
+            min-width: 180px; /* Ensure it doesn't get too small */
+        }
+        .search-container .btn {
+            /* Bootstrap buttons already have good padding and margins */
+            margin-top: 0; /* Override any default margin-top if present */
+            margin-bottom: 0;
+        }
+        #searchResults {
+            margin-top: 5px;
+            width: 100%; /* Take full width on smaller screens */
+            text-align: center; /* Center text */
+        }
+        @media (min-width: 768px) { /* Adjust for larger screens */
+            #searchResults {
+                width: auto; /* Auto width on larger screens */
+                text-align: left; /* Align left */
+                margin-top: 0;
+                margin-left: 15px; /* Add some left margin */
+            }
+        }
   </style>
 
 </head>
