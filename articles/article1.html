@@ -60,29 +60,12 @@ h1, h2, h3 {
   margin-bottom: 1em;
   line-height: 1.2;
 }
-        .search-container {
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap; /* Allow wrapping on smaller screens */
-            gap: 10px; /* Space between items */
-        }
-        .search-container .form-control {
-            flex-grow: 1;
-            min-width: 180px; /* Ensure input doesn't get too small */
-        }
-        .highlight {
-            background-color: yellow; /* Standard highlight color */
-            font-weight: bold;
-            padding: 2px 4px;
-            border-radius: 3px;
-        }
-        /* Removed extra closing brace here */
-
+highlight {
+            background-color: #fde047; /* Tailwind yellow-200 */
+            font-weight: bold;
+            border-radius: 0.25rem; /* rounded-sm */
+            padding: 0 0.125rem; /* px-0.5 */
+        }
   </style>
 
 </head>
@@ -131,11 +114,18 @@ h1, h2, h3 {
           <h3>My Top Picks for Exploring Artificial Intelligence</h3>
 					  <p>This page will definitely be updated over time.</p>
 
-
-<div class="search-container">
-        <input type="text" id="searchInput" class="form-control" placeholder="Type to highlight words...">
-        <button id="searchButton" class="btn btn-primary">Highlight</button>
-    </div>
+<input
+                type="text"
+                id="searchInput"
+                placeholder="Enter word to search..."
+                class="flex-grow p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg w-full sm:w-auto"
+            />
+            <button
+                id="searchButton"
+                class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300 ease-in-out w-full sm:w-auto"
+            >
+                Search
+            </button>
 		
 	
 				 <hr class="hr2"> 
