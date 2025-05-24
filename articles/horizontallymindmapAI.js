@@ -76,17 +76,6 @@ var treeData = {
       ]
     },
     {
-      name: "Semi Supervised Learning",
-      description: "Learning that uses both labeled and unlabeled data, often when labeled data is scarce or expensive to obtain.",
-      children: [
-        { name: "Active Learning", description: "A method where the learning algorithm interactively queries a user or some other information source to label new data points with the desired outputs." },
-        { name: "Reinforcement Learning", description: "An area of machine learning concerned with how intelligent agents ought to take actions in an environment in order to maximize the notion of cumulative reward." },
-        { name: "Online Learning", description: "A method of machine learning where data becomes available in a sequential order, and the model is updated iteratively after each new data point or small batch of data." },
-        { name: "Transfer Learning", description: "A machine learning method where a model developed for a task is reused as the starting point for a model on a second task." },
-        { name: "Adversarial Learning", description: "A technique that involves training a model to be robust against adversarial examples, often using generative adversarial networks (GANs)." }
-      ]
-    },
-    {
       name: "Unsupervised Learning",
       description: "Learning from unlabeled data to find hidden patterns, structures, or relationships within the data.",
       children: [
@@ -115,11 +104,31 @@ var treeData = {
           // Specific density estimation methods (e.g., Kernel Density Estimation, Gaussian Mixture Models) could be added here.
         }
       ]
+    },
+    {
+      name: "Semi Supervised Learning",
+      description: "Learning that uses both labeled and unlabeled data, often when labeled data is scarce or expensive to obtain.",
+      children: [
+        { name: "Active Learning", description: "A method where the learning algorithm interactively queries a user or some other information source to label new data points with the desired outputs." },
+        { name: "Online Learning", description: "A method of machine learning where data becomes available in a sequential order, and the model is updated iteratively after each new data point or small batch of data." },
+        { name: "Transfer Learning", description: "A machine learning method where a model developed for a task is reused as the starting point for a model on a second task." },
+        { name: "Adversarial Learning", description: "A technique that involves training a model to be robust against adversarial examples, often using generative adversarial networks (GANs)." }
+      ]
+    },
+    {
+      name: "Reinforcement Learning",
+      description: "In reinforcement learning, an agent learns from a series of reinforcements: rewards and punishments, by interacting with an environment to achieve a goal.",
+      // You can add children here if there are specific sub-types of Reinforcement Learning you want to include.
+      children: [
+        { name: "Q-Learning", description: "A model-free reinforcement learning algorithm to learn a policy telling an agent what action to take under what circumstances." },
+        { name: "SARSA", description: "State-Action-Reward-State-Action, an on-policy reinforcement learning algorithm for learning a Markov decision process policy." }
+      ]
     }
   ]
 };
 
-var margin = {top: 20, right: 250, bottom: 30, left: 150},
+
+var margin = {top: 40, right: 250, bottom: 30, left: 150},
     width = 960 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom;
 
@@ -130,6 +139,14 @@ var svg = d3.select("body").append("svg")
     // Center horizontally by translating group by half the width + margin.left
     .attr("transform", "translate(" + ((width / 2) + margin.left) + "," + margin.top + ")");
 
+svg.append("text")
+    .attr("class", "mindmap-title")
+    .attr("x", 0) // Center the title
+    .attr("y", -margin.top+20) // Position above the tree
+    .attr("text-anchor", "middle")
+    .style("font-size", "24px")
+    .style("font-weight", "bold")
+    .text("Horizontal Mind Map"); 
 var i = 0,
     duration = 750,
     root;

@@ -3,51 +3,129 @@ var treeData = {
   description: "Overview of Machine Learning techniques and methods",
   children: [
     {
-      name: "Supervised",
-      description: "Learning with labeled data to make predictions",
+      name: "Supervised Learning",
+      description: "Learning with labeled data to make predictions, where the model learns from input-output pairs.",
       children: [
         {
-          name: "Regression",
-          description: "Predict continuous numerical values",
+          name: "Classification",
+          description: "Predicting discrete class labels or categories.",
           children: [
-            { name: "Linear Regression", description: "Models relationship between variables linearly" }
+            { name: "Logistic Regression", description: "A linear model for binary classification, predicting the probability of an instance belonging to a particular class." },
+            { name: "Support Vector Machines (SVM)", description: "Finds an optimal hyperplane that separates data points of different classes with the largest margin." }
           ]
         },
         {
-          name: "Classification",
-          description: "Predict discrete class labels",
+          name: "Regression (Parametric)",
+          description: "Predicting continuous numerical values using models with a fixed number of parameters.",
           children: [
-            { name: "Logistic Regression", description: "Models binary outcome probabilities" },
-            { name: "Support Vector Machines (SVM)", description: "Finds optimal separating hyperplane" },
-            { name: "Decision Tree", description: "Models decisions with a tree structure" },
-            { name: "Random Forest", description: "Ensemble of decision trees for improved accuracy" },
-            { name: "XGBoost", description: "Scalable and effective gradient boosting framework" }
+            { name: "OLS (Ordinary Least Squares)", description: "A method to estimate the unknown parameters in a linear regression model by minimizing the sum of the squares of the differences between the observed and predicted values." },
+            { name: "MARS (Multivariate Adaptive Regression Splines)", description: "A non-parametric regression technique that builds a model by fitting piecewise linear basis functions to data." },
+            { name: "PCR (Principal Component Regression)", description: "A regression technique that uses principal components to reduce multicollinearity and improve model stability." },
+            { name: "Ridge Regression", description: "A regularization technique that adds a penalty to the loss function to prevent overfitting in linear regression models." },
+            { name: "Discriminant Analysis", description: "A statistical method used to find a linear combination of features that characterizes or separates two or more classes of objects or events." }
+          ]
+        },
+        {
+          name: "Instance-based (Non-parametric)",
+          description: "Models that make predictions based on similarity to training instances, without forming an explicit model.",
+          children: [
+            { name: "Gaussian Process", description: "A non-parametric, probabilistic model that defines a distribution over functions and can be used for regression and classification." },
+            {
+              name: "Tree-based Methods",
+              description: "Models that partition the feature space into a set of rectangles and fit a simple model (like a constant) in each rectangle.",
+              children: [
+                { name: "Decision Trees", description: "A flowchart-like structure where each internal node represents a test on an attribute, each branch represents an outcome of the test, and each leaf node represents a class label." },
+                { name: "Random Forest", description: "An ensemble learning method that constructs a multitude of decision trees at training time and outputs the class that is the mode of the classes (classification) or mean prediction (regression) of the individual trees." }
+              ]
+            }
+          ]
+        },
+        {
+          name: "Dimensionality Reduction (Supervised Context)",
+          description: "Reducing the number of features while retaining important information, often used for visualization or to improve model performance. In a supervised context, it might consider class labels.",
+          children: [
+            { name: "Latent Variable Models", description: "Models that describe observed data in terms of a set of unobserved (latent) variables, often used for dimensionality reduction." },
+            { name: "Sparse Coding", description: "A technique that represents data as a sparse linear combination of basis vectors, promoting sparsity in the representation." },
+            { name: "Matrix Completion", description: "The task of filling in missing entries of a matrix, often by exploiting underlying low-rank structure." },
+            { name: "Polynomial Chaos", description: "A method for representing stochastic processes or random variables using an orthogonal polynomial basis, often used in uncertainty quantification and model reduction." }
+          ]
+        },
+        {
+          name: "Generative (Density Estimation)",
+          description: "Models that learn the underlying distribution of the data to generate new samples or estimate the probability density function.",
+          children: [
+            { name: "Bayesian Methods", description: "Statistical inference methods that use Bayes' theorem to update the probability for a hypothesis as more evidence or information becomes available." },
+            { name: "MCMC (Markov Chain Monte Carlo)", description: "A class of algorithms for sampling from a probability distribution by constructing a Markov chain that has the desired distribution as its stationary distribution." }
+          ]
+        },
+        {
+          name: "Discriminative",
+          description: "Models that directly learn a mapping from input features to output labels, without explicitly modeling the underlying data distribution.",
+          children: [
+            {
+              name: "Neural Networks",
+              description: "Computational models inspired by the structure and function of biological neural networks, consisting of interconnected nodes (neurons) organized in layers.",
+              children: [
+                { name: "Deep Neural Networks", description: "Neural networks with multiple hidden layers, capable of learning complex representations of data." },
+                { name: "Convolutional Neural Networks (CNNs)", description: "Specialized neural networks designed for processing grid-like data such as images, using convolutional layers to extract features." },
+                { name: "Recurrent Neural Networks (RNNs)", description: "Neural networks designed for sequential data, where connections between nodes form a directed graph along a temporal sequence, allowing them to exhibit temporal dynamic behavior." }
+              ]
+            }
           ]
         }
       ]
     },
     {
-      name: "Semi Supervised",
-      description: "Learning with a mix of labeled and unlabeled data",
+      name: "Unsupervised Learning",
+      description: "Learning from unlabeled data to find hidden patterns, structures, or relationships within the data.",
       children: [
-        { name: "Active Learning", description: "Algorithm queries user for labels on new data points" },
-        { name: "Reinforcement Learning", description: "Learning optimal actions through trial and error" },
-        { name: "Online Learning", description: "Learning from data arriving in a sequential order" },
-        { name: "Transfer Learning", description: "Leveraging knowledge from a source task to a target task" },
-        { name: "Adversarial Learning", description: "Training models in the presence of adversarial examples" }
+        {
+          name: "Clustering",
+          description: "The task of grouping a set of objects in such a way that objects in the same group (called a cluster) are more similar to each other than to those in other groups.",
+          children: [
+            { name: "K-means", description: "An iterative algorithm that partitions 'n' observations into 'k' clusters in which each observation belongs to the cluster with the nearest mean (cluster centroids)." }
+          ]
+        },
+        {
+          name: "Dimensionality Reduction",
+          description: "The process of reducing the number of random variables under consideration by obtaining a set of principal variables.",
+          children: [
+            { name: "PCA (Principal Component Analysis)", description: "A statistical procedure that uses an orthogonal transformation to convert a set of observations of possibly correlated variables into a set of linearly uncorrelated variables called principal components." }
+          ]
+        },
+        {
+          name: "Kernel Methods",
+          description: "A class of algorithms for pattern analysis, whose best-known member is the support vector machine (SVM). These methods rely on kernel functions to map data into a higher-dimensional feature space where they might be linearly separable."
+          // Specific kernel methods (e.g., RBF kernel, polynomial kernel) could be added here if desired.
+        },
+        {
+          name: "Density Estimation",
+          description: "The process of constructing an estimate of the probability density function from observed data. This can be used for anomaly detection, data generation, or understanding data distribution."
+          // Specific density estimation methods (e.g., Kernel Density Estimation, Gaussian Mixture Models) could be added here.
+        }
       ]
     },
     {
-      name: "Unsupervised",
-      description: "Learning patterns from unlabeled data",
+      name: "Semi Supervised Learning",
+      description: "Learning that uses both labeled and unlabeled data, often when labeled data is scarce or expensive to obtain.",
       children: [
-        { name: "KMeans", description: "Partitions data into k clusters based on distance" },
-        { name: "Principal Component Analysis", description: "Finds principal components to reduce dimensionality" }
+        { name: "Active Learning", description: "A method where the learning algorithm interactively queries a user or some other information source to label new data points with the desired outputs." },
+        { name: "Online Learning", description: "A method of machine learning where data becomes available in a sequential order, and the model is updated iteratively after each new data point or small batch of data." },
+        { name: "Transfer Learning", description: "A machine learning method where a model developed for a task is reused as the starting point for a model on a second task." },
+        { name: "Adversarial Learning", description: "A technique that involves training a model to be robust against adversarial examples, often using generative adversarial networks (GANs)." }
+      ]
+    },
+    {
+      name: "Reinforcement Learning",
+      description: "In reinforcement learning, an agent learns from a series of reinforcements: rewards and punishments, by interacting with an environment to achieve a goal.",
+      // You can add children here if there are specific sub-types of Reinforcement Learning you want to include.
+      children: [
+        { name: "Q-Learning", description: "A model-free reinforcement learning algorithm to learn a policy telling an agent what action to take under what circumstances." },
+        { name: "SARSA", description: "State-Action-Reward-State-Action, an on-policy reinforcement learning algorithm for learning a Markov decision process policy." }
       ]
     }
   ]
 };
-
 
 // Set dimensions and radius
 var width = 960,
@@ -61,6 +139,15 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", `translate(${width / 2},${height / 2})`);
 
+
+svg.append("text")
+    .attr("class", "mindmap-title")
+    .attr("x", 0) // Center the title
+    .attr("y", -margin.left+200) // Position above the tree
+    .attr("text-anchor", "middle")
+    .style("font-size", "24px")
+    .style("font-weight", "bold")
+    .text("Radial Mind Map"); 
 // Create radial tree layout
 var treemap = d3.tree()
     .size([2 * Math.PI, radius])
