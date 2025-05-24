@@ -143,7 +143,8 @@ var svg = d3.select("body").append("svg")
 svg.append("text")
     .attr("class", "mindmap-title")
     .attr("x", 0) // Center the title
-    .attr("y", -margin.left+200) // Position above the tree
+    .attr("y", -radius - 40)
+
     .attr("text-anchor", "middle")
     .style("font-size", "24px")
     .style("font-weight", "bold")
@@ -182,7 +183,10 @@ function update(source) {
 
   // Converts from polar to cartesian coordinates
   function project(x, y) {
-    return [y * Math.cos(x - Math.PI / 2), y * Math.sin(x - Math.PI / 2)];
+    // return [y * Math.cos(x - Math.PI / 2), y * Math.sin(x - Math.PI / 2)];
+  return [y * Math.cos(x), y * Math.sin(x)];
+}
+
   }
 
   // LINKS
@@ -249,4 +253,4 @@ function update(source) {
       .style("user-select", "none");
 
   node.exit().remove();
-}
+
